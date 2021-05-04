@@ -28,6 +28,7 @@ function preload(){
   obstacle4 = loadImage("obstacle4.png");
   obstacle5 = loadImage("obstacle5.png");
   obstacle6 = loadImage("obstacle6.png");
+  bg = loadImage("bgimgtrex.png");
   
   gameOverImg = loadImage("gameOver.png");
   restartImg = loadImage("restart.png");
@@ -41,6 +42,8 @@ function setup() {
   trex.addAnimation("running", trex_running);
   trex.addAnimation("collided", trex_collided);
   trex.scale = 0.5;
+  trex.debug = true;
+  trex.setCollider("circle",0,0,40);
   
   ground = createSprite(200,180,400,20);
   ground.addImage("ground",groundImage);
@@ -70,8 +73,10 @@ function setup() {
 
 function draw() {
   //trex.debug = true;
-  background(255);
+  background(bg);
   text("Score: "+ score, 500,50);
+  camera.position.x = width/2;
+  camera.position.y = trex.y;
   
   if (gameState===PLAY){
     score = score + Math.round(getFrameRate()/60);
